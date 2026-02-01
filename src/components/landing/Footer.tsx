@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="col-span-2">
              <div className="flex items-center gap-2 mb-6">
                 <div className="w-8 h-8 rounded bg-primary flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">G</span>
+                  <span className="text-white dark:text-primary-foreground font-bold text-sm">G</span>
                 </div>
                 <span className="font-semibold tracking-tight">Google AI Pro Giveaway</span>
               </div>

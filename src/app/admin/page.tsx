@@ -26,6 +26,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import Link from 'next/link';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -161,13 +162,17 @@ export default function AdminDashboard() {
   const handleSaveSettings = async () => {
     try {
         if (!deadlineInput) return;
-        // Set to end of day UTC
-        const dateObj = new Date(deadlineInput);
-        dateObj.setUTCHours(23, 59, 59, 0); // Force end of day
+        // Logic baru: Kita anggap tanggal yang dipilih admin adalah tanggal WIB.
+        // Kita mau save sebagai: "YYYY-MM-DDT23:59:59+07:00"
+        // Database Supabase (postgres) akan simpan ini sebagai Absolute UTC Timestamp correct point in time.
+        // Contoh: Admin pilih 28 Feb. String: "2026-02-28T23:59:59+07:00"
+        // Ini akan dikirim ke API. API save ke DB.
+        
+        const wibIsoString = `${deadlineInput}T23:59:59+07:00`;
         
         const res = await fetch('/api/settings', {
             method: 'POST',
-            body: JSON.stringify({ giveaway_end_date: dateObj.toISOString() })
+            body: JSON.stringify({ giveaway_end_date: wibIsoString })
         });
         
         if (res.ok) {
@@ -277,13 +282,13 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-secondary/10 flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-secondary/10 dark:bg-black flex flex-col overflow-x-hidden">
       {/* Header */}
-      <header className="bg-white border-b border-primary/5 px-4 md:px-8 py-4 md:py-0 md:h-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sticky top-0 z-40">
+      <header className="bg-white dark:bg-slate-900 border-b border-primary/5 dark:border-white/10 px-4 md:px-8 py-4 md:py-0 md:h-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sticky top-0 z-40">
         <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto justify-between md:justify-start">
           <div className="flex items-center gap-3 md:gap-4">
              <div className="w-8 h-8 bg-primary rounded bg-primary flex items-center justify-center shrink-0">
-               <span className="text-white font-bold text-xs uppercase">G</span>
+               <span className="text-white dark:text-primary-foreground font-bold text-xs uppercase">G</span>
              </div>
              <div>
                 <h1 className="font-bold tracking-tight text-primary text-sm md:text-base">Console Admin</h1>
@@ -296,6 +301,7 @@ export default function AdminDashboard() {
         </div>
         
         <div className="flex items-center justify-end gap-2 md:gap-6 w-full md:w-auto">
+           <ThemeToggle />
            <Link href="/" target="_blank" className="p-2 md:p-0 text-primary/40 hover:text-primary transition-colors" title="Lihat Website">
               <ExternalLink className="w-5 h-5" />
            </Link>
@@ -316,17 +322,17 @@ export default function AdminDashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           {[
-            { label: 'Total Pendaftaran', value: stats?.total || 0, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
-            { label: 'Belum Direview', value: stats?.pending || 0, icon: Clock, color: 'text-orange-600', bg: 'bg-orange-50' },
-            { label: 'Sudah Review', value: stats?.reviewed || 0, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50' },
-            { label: 'Pemenang', value: stats?.winners || 0, icon: Trophy, color: 'text-purple-600', bg: 'bg-purple-50' },
+            { label: 'Total Pendaftaran', value: stats?.total || 0, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
+            { label: 'Belum Direview', value: stats?.pending || 0, icon: Clock, color: 'text-orange-600', bg: 'bg-orange-50 dark:bg-orange-900/20' },
+            { label: 'Sudah Review', value: stats?.reviewed || 0, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
+            { label: 'Pemenang', value: stats?.winners || 0, icon: Trophy, color: 'text-purple-600', bg: 'bg-purple-50 dark:bg-purple-900/20' },
           ].map((item, i) => (
             <motion.div 
                key={i}
                initial={{ opacity: 0, y: 10 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: i * 0.05 }}
-               className="bg-white p-6 rounded-2xl border border-primary/5 shadow-sm space-y-4"
+               className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-primary/5 dark:border-white/10 shadow-sm space-y-4"
             >
               <div className="flex items-center justify-between">
                  <div className={`p-2 rounded-lg ${item.bg}`}>
@@ -343,8 +349,8 @@ export default function AdminDashboard() {
         </div>
 
         {/* Table Area */}
-        <div className="bg-white rounded-[2rem] border border-primary/5 shadow-xl shadow-primary/5 overflow-hidden">
-          <div className="p-6 md:p-8 border-b border-primary/5 space-y-6 md:space-y-0 md:flex md:justify-between md:items-center">
+        <div className="bg-white dark:bg-slate-900 rounded-[2rem] border border-primary/5 dark:border-white/10 shadow-xl shadow-primary/5 overflow-hidden">
+          <div className="p-6 md:p-8 border-b border-primary/5 dark:border-white/10 space-y-6 md:space-y-0 md:flex md:justify-between md:items-center">
              <div className="space-y-1">
                 <h2 className="font-serif text-2xl text-primary font-medium tracking-tight">Database Entri</h2>
                 <p className="text-sm text-primary/30">Daftar semua pendaftar giveaway aktif.</p>
@@ -355,7 +361,7 @@ export default function AdminDashboard() {
                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/30" />
                    <Input 
                       placeholder="Cari nama atau email..." 
-                      className="pl-10 h-11 bg-secondary/10 border-transparent rounded-full text-sm w-full"
+                      className="pl-10 h-11 bg-secondary/10 dark:bg-slate-800 border-transparent rounded-full text-sm w-full"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                    />
@@ -372,7 +378,7 @@ export default function AdminDashboard() {
           </div>
           
           {/* Dev Tools */}
-          <div className="px-6 md:px-8 py-4 bg-slate-50/50 flex gap-2 flex-wrap border-b border-primary/5">
+          <div className="px-6 md:px-8 py-4 bg-slate-50/50 dark:bg-slate-900/50 flex gap-2 flex-wrap border-b border-primary/5 dark:border-white/10">
             <Button 
                 variant="outline" 
                 size="sm" 
@@ -397,8 +403,8 @@ export default function AdminDashboard() {
 
           <div className="overflow-x-auto w-full">
             <Table className="min-w-[800px] w-full">
-              <TableHeader className="bg-secondary/5">
-                <TableRow className="border-primary/5 hover:bg-transparent">
+              <TableHeader className="bg-secondary/5 dark:bg-slate-800/50">
+                <TableRow className="border-primary/5 dark:border-white/10 hover:bg-transparent">
                   <TableHead className="py-6 font-bold uppercase tracking-widest text-[10px] text-primary/40 pl-6 md:pl-8 w-[40%] md:w-[30%]">Pendaftar</TableHead>
                   <TableHead className="font-bold uppercase tracking-widest text-[10px] text-primary/40 w-[15%]">Status</TableHead>
                   <TableHead className="font-bold uppercase tracking-widest text-[10px] text-primary/40 w-[20%]">Skor AI</TableHead>
@@ -410,10 +416,10 @@ export default function AdminDashboard() {
                 <AnimatePresence>
                 {filteredSubmissions.length > 0 ? (
                   filteredSubmissions.map((sub, i) => (
-                    <TableRow key={sub.id} className="border-primary/5 hover:bg-secondary/5 transition-colors group">
+                    <TableRow key={sub.id} className="border-primary/5 dark:border-white/10 hover:bg-secondary/5 dark:hover:bg-slate-800/50 transition-colors group">
                       <TableCell className="py-4 md:py-6 pl-6 md:pl-8 min-w-[200px]">
                         <div className="flex items-center gap-3 md:gap-4">
-                           <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-primary text-white flex items-center justify-center font-serif text-lg md:text-xl shadow-lg shadow-primary/10 shrink-0">
+                           <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-primary text-white dark:text-primary-foreground flex items-center justify-center font-serif text-lg md:text-xl shadow-lg shadow-primary/10 shrink-0">
                               {sub.full_name.charAt(0)}
                            </div>
                            <div className="min-w-0">
@@ -477,24 +483,24 @@ export default function AdminDashboard() {
 
       {/* Detail Modal */}
       <Dialog open={isDetailModalOpen} onOpenChange={setIsDetailModalOpen}>
-        <DialogContent className="max-w-[95vw] md:!max-w-5xl w-full h-[90vh] md:!h-[85vh] p-0 flex flex-col rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-none bg-white shadow-2xl">
+        <DialogContent className="max-w-[95vw] md:!max-w-5xl w-full h-[90vh] md:!h-[85vh] p-0 flex flex-col rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-none bg-white dark:bg-slate-950 shadow-2xl">
           <DialogTitle className="sr-only">Detail Pendaftar</DialogTitle>
           {selectedSubmission && (
             <>
                {/* Fixed Header */}
-               <div className="bg-[#FDFBF7] px-6 py-6 md:px-10 md:py-8 border-b border-primary/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8 shrink-0">
+               <div className="bg-[#FDFBF7] dark:bg-slate-900 px-6 py-6 md:px-10 md:py-8 border-b border-primary/5 dark:border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8 shrink-0">
                   <div className="flex items-center gap-4 md:gap-8 w-full md:w-auto">
                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-[#0F172A] flex items-center justify-center text-white text-2xl md:text-3xl font-serif shadow-xl shrink-0">
                         {selectedSubmission.full_name.charAt(0)}
                      </div>
                      <div className="space-y-1 min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2 md:gap-4">
-                           <h2 className="font-serif text-2xl md:text-4xl text-[#1e293b] leading-tight truncate">{selectedSubmission.full_name}</h2>
+                           <h2 className="font-serif text-2xl md:text-4xl text-[#1e293b] dark:text-slate-100 leading-tight truncate">{selectedSubmission.full_name}</h2>
                            <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-none px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shrink-0">
                               {selectedSubmission.status}
                            </Badge>
                         </div>
-                        <p className="text-sm md:text-xl text-[#1e293b]/50 font-medium truncate">{selectedSubmission.gmail}</p>
+                        <p className="text-sm md:text-xl text-[#1e293b]/50 dark:text-slate-400 font-medium truncate">{selectedSubmission.gmail}</p>
                      </div>
                   </div>
 
@@ -530,18 +536,18 @@ export default function AdminDashboard() {
                </div>
 
                {/* Scrollable Document Area */}
-               <div className="flex-1 overflow-y-auto px-6 py-8 md:px-10 md:py-12 bg-white">
+               <div className="flex-1 overflow-y-auto px-6 py-8 md:px-10 md:py-12 bg-white dark:bg-slate-950">
                   <div className="max-w-5xl mx-auto space-y-12 md:space-y-16 pb-20">
                     
                     {/* Insights Section */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                        <div className="md:col-span-2 p-6 md:p-10 bg-[#F8FAFC] rounded-[1.5rem] md:rounded-[2rem] border border-slate-100 space-y-4 md:space-y-6 relative overflow-hidden">
+                        <div className="md:col-span-2 p-6 md:p-10 bg-[#F8FAFC] dark:bg-slate-900 rounded-[1.5rem] md:rounded-[2rem] border border-slate-100 dark:border-slate-800 space-y-4 md:space-y-6 relative overflow-hidden">
                            <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                               <Sparkles className="w-32 h-32 text-emerald-600" />
                            </div>
                            <div className="space-y-2 relative">
                               <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">Gemini AI Analysis</p>
-                              <p className="text-lg md:text-2xl text-slate-700 font-serif leading-relaxed italic">
+                              <p className="text-lg md:text-2xl text-slate-700 dark:text-slate-300 font-serif leading-relaxed italic">
                                  "{selectedSubmission.ai_reasoning || 'Belum ada analisis mendalam. Klik tombol di samping untuk memulai.'}"
                               </p>
                            </div>
@@ -578,15 +584,15 @@ export default function AdminDashboard() {
                                 <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-slate-300 shrink-0">{item.l}</span>
                              </div>
                              <div className="space-y-3 md:space-y-6 max-w-4xl">
-                                <h3 className="font-serif text-xl md:text-3xl text-[#0F172A] leading-tight">{item.q}</h3>
-                                <p className="text-lg md:text-2xl text-slate-600 leading-relaxed font-light">{item.a}</p>
+                                <h3 className="font-serif text-xl md:text-3xl text-[#0F172A] dark:text-white leading-tight">{item.q}</h3>
+                                <p className="text-lg md:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed font-light">{item.a}</p>
                              </div>
                           </div>
                         ))}
                     </div>
 
                     {/* Footer Info */}
-                    <div className="pt-12 md:pt-20 border-t border-slate-100 flex flex-col md:flex-row gap-2 justify-between items-center text-[10px] font-bold uppercase tracking-[0.4em] text-slate-300 text-center md:text-left">
+                    <div className="pt-12 md:pt-20 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row gap-2 justify-between items-center text-[10px] font-bold uppercase tracking-[0.4em] text-slate-300 dark:text-slate-600 text-center md:text-left">
                         <span>Submitted on {new Date(selectedSubmission.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                         <span>Ref ID: {selectedSubmission.id}</span>
                     </div>
@@ -609,7 +615,7 @@ export default function AdminDashboard() {
                         value={deadlineInput} 
                         onChange={(e) => setDeadlineInput(e.target.value)} 
                     />
-                    <p className="text-xs text-gray-500">Timer di halaman depan akan hitung mundur ke tanggal ini (pukul 23:59 UTC).</p>
+                    <p className="text-xs text-gray-500">Timer di halaman depan akan hitung mundur ke tanggal ini (pukul 23:59 WIB).</p>
                 </div>
                 <Button onClick={handleSaveSettings} className="w-full bg-[#0F172A]">
                     Simpan Perubahan

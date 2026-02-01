@@ -92,14 +92,14 @@ export default function SubmitPage() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full text-center space-y-8 p-12 bg-white rounded-3xl border border-primary/5 shadow-2xl"
+          className="max-w-md w-full text-center space-y-8 p-12 bg-white dark:bg-slate-900 rounded-3xl border border-primary/5 dark:border-white/10 shadow-2xl"
         >
-          <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-20 h-20 bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="w-10 h-10 text-green-500" />
           </div>
           <div className="space-y-4">
-            <h1 className="font-serif text-4xl text-primary">Mantap, Masuk! 🎉</h1>
-            <p className="text-primary/60 text-lg">
+            <h1 className="font-serif text-4xl text-primary dark:text-white">Mantap, Masuk! 🎉</h1>
+            <p className="text-primary/60 dark:text-white/60 text-lg">
               Jawaban lo udah kesimpen aman. Pemenang bakal diumumin via IG Story Kelas tanggal {announcementDate}. Pantengin terus!
             </p>
           </div>
@@ -114,49 +114,49 @@ export default function SubmitPage() {
   }
 
   return (
-    <main className="min-h-screen bg-secondary/30 pb-24">
+    <main className="min-h-screen bg-secondary/30 dark:bg-slate-950 pb-24">
       <nav className="p-8 max-w-7xl mx-auto flex justify-between items-center">
-        <Link href="/" className="group flex items-center gap-2 text-primary/40 hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">
+        <Link href="/" className="group flex items-center gap-2 text-primary/40 dark:text-white/40 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">
            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Balik
         </Link>
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded bg-primary flex items-center justify-center">
-            <span className="text-white font-bold text-[10px]">G</span>
+            <span className="text-white dark:text-primary-foreground font-bold text-[10px]">G</span>
           </div>
-          <span className="font-bold text-sm tracking-tight text-primary">APPLICATION FORM</span>
+          <span className="font-bold text-sm tracking-tight text-primary dark:text-white">APPLICATION FORM</span>
         </div>
       </nav>
 
       <div className="max-w-3xl mx-auto px-4 pt-12">
         <div className="mb-16">
-           <h1 className="font-serif text-5xl md:text-6xl text-primary mb-6">Giveaway Form 🚀</h1>
-           <p className="text-primary/60 text-lg max-w-xl leading-relaxed">
+           <h1 className="font-serif text-5xl md:text-6xl text-primary dark:text-white mb-6">Giveaway Form 🚀</h1>
+           <p className="text-primary/60 dark:text-white/60 text-lg max-w-xl leading-relaxed">
              Isi jawaban lo se-kreatif dan se-jujur mungkin. Jawaban bakal dinilai sama AI + Tim Juri. Jangan kaku-kaku amat, santai aja!
            </p>
         </div>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 bg-white p-8 md:p-12 rounded-[2rem] border border-primary/5 shadow-2xl shadow-primary/5">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 bg-white dark:bg-slate-900/50 backdrop-blur-sm p-8 md:p-12 rounded-[2rem] border border-primary/5 dark:border-white/10 shadow-2xl shadow-primary/5 dark:shadow-none">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <Label htmlFor="full_name" className="text-xs font-bold uppercase tracking-widest text-primary/40">Nama Lengkap</Label>
+              <Label htmlFor="full_name" className="text-xs font-bold uppercase tracking-widest text-primary/40 dark:text-white/40">Nama Lengkap</Label>
               <Input 
                 id="full_name" 
                 {...form.register('full_name')}
                 placeholder="Misal: Budi Santoso"
-                className="h-14 bg-secondary/20 border-transparent focus:border-primary/20 focus:bg-white transition-all text-lg"
+                className="h-14 bg-secondary/20 dark:bg-slate-800/50 border-transparent focus:border-primary/20 dark:focus:border-white/20 focus:bg-white dark:focus:bg-slate-800 transition-all text-lg dark:text-white dark:placeholder:text-slate-500"
               />
               {form.formState.errors.full_name && (
                 <p className="text-red-500 text-xs italic">{form.formState.errors.full_name.message}</p>
               )}
             </div>
             <div className="space-y-4">
-              <Label htmlFor="gmail" className="text-xs font-bold uppercase tracking-widest text-primary/40">Akun Gmail</Label>
+              <Label htmlFor="gmail" className="text-xs font-bold uppercase tracking-widest text-primary/40 dark:text-white/40">Akun Gmail</Label>
               <Input 
                 id="gmail" 
                 type="email"
                 {...form.register('gmail')}
                 placeholder="Misal: budi@gmail.com"
-                className="h-14 bg-secondary/20 border-transparent focus:border-primary/20 focus:bg-white transition-all text-lg"
+                className="h-14 bg-secondary/20 dark:bg-slate-800/50 border-transparent focus:border-primary/20 dark:focus:border-white/20 focus:bg-white dark:focus:bg-slate-800 transition-all text-lg dark:text-white dark:placeholder:text-slate-500"
               />
               {form.formState.errors.gmail && (
                 <p className="text-red-500 text-xs italic">{form.formState.errors.gmail.message}</p>
@@ -164,46 +164,46 @@ export default function SubmitPage() {
             </div>
           </div>
 
-          <div className="space-y-4 border-t border-primary/5 pt-12">
+          <div className="space-y-4 border-t border-primary/5 dark:border-white/10 pt-12">
             <div className="flex justify-between items-end mb-2">
-              <Label className="text-xs font-bold uppercase tracking-widest text-primary/40 italic">Pertimbangan 01</Label>
+              <Label className="text-xs font-bold uppercase tracking-widest text-primary/40 dark:text-white/40 italic">Pertimbangan 01</Label>
             </div>
-            <p className="text-primary font-medium text-xl">Kenapa lo harus dapet akses ini?</p>
+            <p className="text-primary dark:text-white font-medium text-xl">Kenapa lo harus dapet akses ini?</p>
             <Textarea 
               {...form.register('answer_1')}
               placeholder="Ceritain motivasi lo, jangan jawaban template ChatGPT ya..."
-              className="min-h-[150px] bg-secondary/20 border-transparent focus:border-primary/20 focus:bg-white transition-all text-lg leading-relaxed pt-4"
+              className="min-h-[150px] bg-secondary/20 dark:bg-slate-800/50 border-transparent focus:border-primary/20 dark:focus:border-white/20 focus:bg-white dark:focus:bg-slate-800 transition-all text-lg leading-relaxed pt-4 dark:text-white dark:placeholder:text-slate-500"
             />
           </div>
 
-          <div className="space-y-4 border-t border-primary/5 pt-12">
+          <div className="space-y-4 border-t border-primary/5 dark:border-white/10 pt-12">
             <div className="flex justify-between items-end mb-2">
-              <Label className="text-xs font-bold uppercase tracking-widest text-primary/40 italic">Pertimbangan 02</Label>
+              <Label className="text-xs font-bold uppercase tracking-widest text-primary/40 dark:text-white/40 italic">Pertimbangan 02</Label>
             </div>
-            <p className="text-primary font-medium text-xl">Mau dipake buat apa emang?</p>
+            <p className="text-primary dark:text-white font-medium text-xl">Mau dipake buat apa emang?</p>
             <Textarea 
               {...form.register('answer_2')}
               placeholder="Sebutin project atau tugas spesifik yang bakal lo kerjain..."
-              className="min-h-[150px] bg-secondary/20 border-transparent focus:border-primary/20 focus:bg-white transition-all text-lg leading-relaxed pt-4"
+              className="min-h-[150px] bg-secondary/20 dark:bg-slate-800/50 border-transparent focus:border-primary/20 dark:focus:border-white/20 focus:bg-white dark:focus:bg-slate-800 transition-all text-lg leading-relaxed pt-4 dark:text-white dark:placeholder:text-slate-500"
             />
           </div>
 
-          <div className="space-y-4 border-t border-primary/5 pt-12">
+          <div className="space-y-4 border-t border-primary/5 dark:border-white/10 pt-12">
             <div className="flex justify-between items-end mb-2">
-              <Label className="text-xs font-bold uppercase tracking-widest text-primary/40 italic">Pertimbangan 03</Label>
+              <Label className="text-xs font-bold uppercase tracking-widest text-primary/40 dark:text-white/40 italic">Pertimbangan 03</Label>
             </div>
-            <p className="text-primary font-medium text-xl">Seberapa ngaruh buat hidup lo?</p>
+            <p className="text-primary dark:text-white font-medium text-xl">Seberapa ngaruh buat hidup lo?</p>
             <Textarea 
               {...form.register('answer_3')}
               placeholder="Bakal bikin IPK naik? Atau bikin portofolio keren? Ceritain!..."
-              className="min-h-[150px] bg-secondary/20 border-transparent focus:border-primary/20 focus:bg-white transition-all text-lg leading-relaxed pt-4"
+              className="min-h-[150px] bg-secondary/20 dark:bg-slate-800/50 border-transparent focus:border-primary/20 dark:focus:border-white/20 focus:bg-white dark:focus:bg-slate-800 transition-all text-lg leading-relaxed pt-4 dark:text-white dark:placeholder:text-slate-500"
             />
           </div>
 
           <Button 
             type="submit" 
             disabled={isSubmitting}
-            className="w-full h-16 rounded-full text-xl font-medium bg-primary text-primary-foreground hover:scale-[1.02] transition-all disabled:opacity-50 shadow-2xl shadow-primary/20"
+            className="w-full h-16 rounded-full text-xl font-medium bg-primary text-primary-foreground hover:scale-[1.02] transition-all disabled:opacity-50 shadow-2xl shadow-primary/20 dark:shadow-none"
           >
             {isSubmitting ? (
               <>
