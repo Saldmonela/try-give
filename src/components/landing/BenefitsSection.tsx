@@ -23,12 +23,12 @@ const benefits = [
     icon: Palette,
     title: 'Nano Banana: Visual Ajaib',
     description: 'Bikin gambar level studio animasi Pixar. Lighting, tekstur, resolusi—semuanya on point tanpa tapi.',
-    bg: 'bg-yellow-50 dark:bg-yellow-950/10',
-    titleColor: 'text-yellow-900 dark:text-yellow-100',
-    descColor: 'text-yellow-700 dark:text-yellow-200/80',
-    iconBg: 'bg-yellow-100 dark:bg-yellow-900/20',
-    border: 'border-yellow-200 dark:border-yellow-800/30',
-    iconColor: 'text-yellow-600 dark:text-yellow-400',
+    bg: 'bg-[#181200] dark:bg-[#1a1500]', // Always Dark (Premium Feel)
+    titleColor: 'text-yellow-50',
+    descColor: 'text-yellow-100/80',
+    iconBg: 'bg-yellow-500/10',
+    border: 'border-yellow-500/20',
+    iconColor: 'text-yellow-400',
     image: 'https://placehold.co/800x600/FEFCE8/854D0E?text=Nano+Banana+Pro',
     link: '/features#nano-banana'
   },

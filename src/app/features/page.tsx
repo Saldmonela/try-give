@@ -9,18 +9,22 @@ import { Button } from '@/components/ui/button';
 
 export default function FeaturesPage() {
   return (
-    <main className="min-h-screen bg-white selection:bg-primary/10">
+    <main className="min-h-screen bg-background selection:bg-primary/10 relative">
+      {/* Background Gradient from Hero */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-accent/5 to-transparent" />
+      </div>
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-primary/5">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-primary/5">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="group flex items-center gap-2 text-primary/60 hover:text-primary transition-colors font-medium">
+          <Link href="/" className="group flex items-center gap-2 text-primary/60 dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors font-medium">
              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> 
              <span className="hidden sm:inline">Kembali ke Home</span>
              <span className="inline sm:hidden">Home</span>
           </Link>
           <div className="flex items-center gap-2">
             <span className="font-bold tracking-tight text-primary text-sm md:text-base">Google AI Pro</span>
-            <span className="text-[10px] font-bold bg-primary text-white px-2 py-0.5 rounded-full uppercase tracking-widest whitespace-nowrap">Deep Dive</span>
+            <span className="text-[10px] font-bold bg-primary text-primary-foreground px-2 py-0.5 rounded-full uppercase tracking-widest whitespace-nowrap">Deep Dive</span>
           </div>
         </div>
       </nav>
@@ -33,26 +37,26 @@ export default function FeaturesPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-16 md:mb-24 text-center space-y-4 md:space-y-6"
           >
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-primary leading-[1.1]">
-              Ini Bukan <br /><span className="italic text-primary/60">Chatbot Biasa, Bro.</span>
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-primary dark:text-white leading-[1.1]">
+              Ini Bukan <br /><span className="italic text-primary/60 dark:text-white/60">Chatbot Biasa, Bro.</span>
             </h1>
-            <p className="text-lg md:text-2xl text-primary/60 max-w-2xl mx-auto leading-relaxed">
-              Google AI Pro (senilai <span className="text-primary font-bold">Rp 4 Jutaan/tahun</span>) itu asisten probadi lo buat ngerjain tugas, ngoding, sampe bikin konten. Gratis, khusus anak Kelas 32!
+            <p className="text-lg md:text-2xl text-primary/60 dark:text-white/60 max-w-2xl mx-auto leading-relaxed">
+              Google AI Pro (senilai <span className="text-primary dark:text-white font-bold">Rp 4 Jutaan/tahun</span>) itu asisten probadi lo buat ngerjain tugas, ngoding, sampe bikin konten. Gratis, khusus anak Kelas 32!
             </p>
           </motion.div>
 
           {/* 1. Core AI Capabilities */}
           <section id="gemini" className="mb-20 md:mb-32 scroll-mt-28">
             <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
-                <Brain className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center">
+                <Brain className="w-5 h-5 md:w-6 md:h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <h2 className="font-serif text-2xl md:text-4xl text-primary">Otak Di Balik Layar</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div className="p-6 md:p-8 bg-slate-50 rounded-3xl space-y-4 border border-slate-100 hover:shadow-lg transition-shadow">
-                <h3 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+              <div className="p-6 md:p-8 bg-card border border-primary/5 rounded-3xl space-y-4 hover:shadow-lg transition-shadow">
+                <h3 className="text-xl md:text-2xl font-bold text-primary flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-amber-500" />
                   Gemini 3 Pro
                 </h3>
@@ -60,8 +64,8 @@ export default function FeaturesPage() {
                   Otak paling encer dari Google. Dengan <strong>1 Juta Token Context</strong>, dia bisa baca satu buku tebel atau ribuan baris kode dalam sekejap. Riset skripsi? Sat set kelar.
                 </p>
               </div>
-              <div className="p-6 md:p-8 bg-slate-50 rounded-3xl space-y-4 border border-slate-100 hover:shadow-lg transition-shadow">
-                <h3 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+              <div className="p-6 md:p-8 bg-card border border-primary/5 rounded-3xl space-y-4 hover:shadow-lg transition-shadow">
+                <h3 className="text-xl md:text-2xl font-bold text-primary flex items-center gap-2">
                   <Zap className="w-5 h-5 text-amber-500" />
                   Dynamic Thinking
                 </h3>
@@ -75,8 +79,8 @@ export default function FeaturesPage() {
           {/* 2. Content Creation */}
           <section id="veo" className="mb-20 md:mb-32 scroll-mt-28">
             <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-50 rounded-2xl flex items-center justify-center">
-                <Video className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-50 dark:bg-purple-900/20 rounded-2xl flex items-center justify-center">
+                <Video className="w-5 h-5 md:w-6 md:h-6 text-purple-600 dark:text-purple-400" />
               </div>
               <h2 className="font-serif text-2xl md:text-4xl text-primary">Konten Kreator Mode</h2>
             </div>
@@ -115,46 +119,46 @@ export default function FeaturesPage() {
           {/* 3. Deep Research & Productivity */}
           <section id="research" className="mb-20 md:mb-32 scroll-mt-28">
             <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-emerald-50 rounded-2xl flex items-center justify-center">
-                <Globe className="w-5 h-5 md:w-6 md:h-6 text-emerald-600" />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl flex items-center justify-center">
+                <Globe className="w-5 h-5 md:w-6 md:h-6 text-emerald-600 dark:text-emerald-400" />
               </div>
               <h2 className="font-serif text-2xl md:text-4xl text-primary">Joki Tugas Otomatis</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:col-span-2 p-6 md:p-8 border border-primary/10 rounded-3xl bg-secondary/5">
-                <h3 className="text-xl md:text-2xl font-bold mb-4">Deep Research Agent</h3>
+              <div className="md:col-span-2 p-6 md:p-8 border border-primary/5 rounded-3xl bg-card">
+                <h3 className="text-xl md:text-2xl font-bold mb-4 text-primary">Deep Research Agent</h3>
                 <p className="text-primary/70 mb-6 text-base md:text-lg">
                   Lo tidur, dia kerja. Cari ratusan sumber, baca jurnal, terus bikinin <b>laporan lengkap</b>. Tinggal lo baca dikit, edit, kelar deh tugas kuliah.
                 </p>
-                <div className="inline-flex items-center gap-3 px-4 py-2 bg-white rounded-full border shadow-sm text-sm font-semibold">
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-background rounded-full border border-primary/10 shadow-sm text-sm font-semibold text-primary">
                   <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                   20 Laporan Mendalam / Bulan
                 </div>
               </div>
               
-              <div className="p-6 md:p-8 border border-primary/10 rounded-3xl bg-white space-y-4">
-                 <h3 className="text-lg md:text-xl font-bold">NotebookLM Premium</h3>
-                 <p className="text-sm text-primary/60">
+              <div className="p-6 md:p-8 border border-primary/5 rounded-3xl bg-card space-y-4">
+                 <h3 className="text-lg md:text-xl font-bold text-primary dark:text-white">NotebookLM Premium</h3>
+                 <p className="text-sm text-primary/60 dark:text-white/60">
                    Catatan kuliah lo jadi pinter. <br/>
                    <b>500 Notebooks</b> (vs 100 free) <br/>
                    <b>300 Sumber/Note</b>
                  </p>
               </div>
 
-               <div className="p-6 md:p-8 border border-primary/10 rounded-3xl bg-white space-y-4">
-                 <h3 className="text-lg md:text-xl font-bold">Integ. Workspace</h3>
-                 <p className="text-sm text-primary/60">
+               <div className="p-6 md:p-8 border border-primary/5 rounded-3xl bg-card space-y-4">
+                 <h3 className="text-lg md:text-xl font-bold text-primary dark:text-white">Integ. Workspace</h3>
+                 <p className="text-sm text-primary/60 dark:text-white/60">
                    Ada di <b>Docs, Gmail, Sheets, & Slides</b>. Mau nulis email formal atau rapiin data? Tinggal klik.
                  </p>
               </div>
 
-              <div className="md:col-span-2 p-6 md:p-8 border border-primary/10 rounded-3xl bg-indigo-50/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="md:col-span-2 p-6 md:p-8 border border-primary/10 dark:border-indigo-500/20 rounded-3xl bg-indigo-50/50 dark:bg-indigo-950/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-indigo-900">2TB Cloud Storage</h3>
-                    <p className="text-indigo-800/70 text-sm md:text-base">Tempat lega buat backup file kuliah, foto dokumentasi, sampai project-project iseng. Gak usah pusing storage HP penuh.</p>
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-indigo-900 dark:text-indigo-300">2TB Cloud Storage</h3>
+                    <p className="text-indigo-800/70 dark:text-indigo-200/70 text-sm md:text-base">Tempat lega buat backup file kuliah, foto dokumentasi, sampai project-project iseng. Gak usah pusing storage HP penuh.</p>
                  </div>
-                 <HardDrive className="w-12 h-12 md:w-16 md:h-16 text-indigo-200" />
+                 <HardDrive className="w-12 h-12 md:w-16 md:h-16 text-indigo-200 dark:text-indigo-700" />
               </div>
             </div>
           </section>
@@ -162,8 +166,8 @@ export default function FeaturesPage() {
           {/* New Section: Google Antigravity */}
           <section id="antigravity" className="mb-20 md:mb-32 scroll-mt-28">
             <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-               <div className="w-10 h-10 md:w-12 md:h-12 bg-pink-50 rounded-2xl flex items-center justify-center">
-                  <Terminal className="w-5 h-5 md:w-6 md:h-6 text-pink-600" />
+               <div className="w-10 h-10 md:w-12 md:h-12 bg-pink-50 dark:bg-pink-900/20 rounded-2xl flex items-center justify-center">
+                  <Terminal className="w-5 h-5 md:w-6 md:h-6 text-pink-600 dark:text-pink-400" />
                </div>
                <h2 className="font-serif text-2xl md:text-4xl text-primary">Google Antigravity</h2>
             </div>
@@ -240,8 +244,8 @@ export default function FeaturesPage() {
           {/* New Section: Nano Banana Pro */}
           <section id="nano-banana" className="mb-20 md:mb-32 scroll-mt-28">
             <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-               <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-50 rounded-2xl flex items-center justify-center">
-                  <Palette className="w-5 h-5 md:w-6 md:h-6 text-yellow-600" />
+               <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-50 dark:bg-yellow-900/20 rounded-2xl flex items-center justify-center">
+                  <Palette className="w-5 h-5 md:w-6 md:h-6 text-yellow-600 dark:text-yellow-400" />
                </div>
                <h2 className="font-serif text-2xl md:text-4xl text-primary">Nano Banana Pro</h2>
             </div>
@@ -319,44 +323,44 @@ export default function FeaturesPage() {
              </div>
 
              {/* Fix: Table responsive wrapper */}
-             <div className="rounded-3xl border border-primary/10 shadow-2xl overflow-hidden bg-white">
+             <div className="rounded-3xl border border-primary/10 shadow-2xl overflow-hidden bg-card">
                <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse bg-white min-w-[600px]">
+                <table className="w-full text-left border-collapse min-w-[600px]">
                  <thead>
-                   <tr className="bg-secondary/20">
+                   <tr className="bg-secondary/50">
                      <th className="p-4 md:p-6 text-xs md:text-sm font-bold uppercase tracking-widest text-primary/50">Fitur</th>
                      <th className="p-4 md:p-6 text-xs md:text-sm font-bold uppercase tracking-widest text-primary/50">Free Tier</th>
                      <th className="p-4 md:p-6 text-xs md:text-sm font-bold uppercase tracking-widest text-primary bg-primary/5">AI Pro (Giveaway)</th>
                    </tr>
                  </thead>
-                 <tbody className="divide-y divide-primary/5">
+                 <tbody className="divide-y divide-primary/5 dark:divide-white/10">
                    <tr>
-                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base">Context Window</td>
+                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base text-primary">Context Window</td>
                      <td className="p-4 md:p-6 text-primary/60 text-sm md:text-base">32K tokens</td>
                      <td className="p-4 md:p-6 font-bold text-primary bg-primary/5 text-sm md:text-base">1 Juta Tokens 🔥</td>
                    </tr>
                    <tr>
-                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base">Antigravity Rate Limit</td>
+                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base text-primary">Antigravity Rate Limit</td>
                      <td className="p-4 md:p-6 text-primary/60 text-sm md:text-base">Standard (Weekly Reset)</td>
                      <td className="p-4 md:p-6 font-bold text-primary bg-primary/5 text-sm md:text-base">✅ High (5-Hour Reset)</td>
                    </tr>
                    <tr>
-                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base">Video Generation</td>
+                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base text-primary">Video Generation</td>
                      <td className="p-4 md:p-6 text-primary/60 text-sm md:text-base">❌ Tidak Tersedia</td>
                      <td className="p-4 md:p-6 font-bold text-primary bg-primary/5 text-sm md:text-base">✅ Veo 3.1 (3x/hari)</td>
                    </tr>
                     <tr>
-                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base">Deep Research</td>
+                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base text-primary">Deep Research</td>
                      <td className="p-4 md:p-6 text-primary/60 text-sm md:text-base">Terbatas</td>
                      <td className="p-4 md:p-6 font-bold text-primary bg-primary/5 text-sm md:text-base">✅ 20 Laporan/Bulan</td>
                    </tr>
                     <tr>
-                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base">Cloud Storage</td>
+                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base text-primary">Cloud Storage</td>
                      <td className="p-4 md:p-6 text-primary/60 text-sm md:text-base">15 GB</td>
                      <td className="p-4 md:p-6 font-bold text-primary bg-primary/5 text-sm md:text-base">✅ 2 TB (2.000 GB)</td>
                    </tr>
                     <tr>
-                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base">NotebookLM</td>
+                     <td className="p-4 md:p-6 font-semibold text-sm md:text-base text-primary">NotebookLM</td>
                      <td className="p-4 md:p-6 text-primary/60 text-sm md:text-base">100 Notebooks</td>
                      <td className="p-4 md:p-6 font-bold text-primary bg-primary/5 text-sm md:text-base">✅ 500 Notebooks</td>
                    </tr>
