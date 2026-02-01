@@ -62,15 +62,15 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
           className="flex flex-col items-center"
         >
           <div className="relative">
-            <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white border border-primary/10 flex items-center justify-center shadow-xl shadow-primary/5">
-              <span className="text-2xl md:text-4xl font-bold text-primary font-serif">
+            <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white dark:bg-slate-900/40 border border-primary/10 dark:border-white/10 flex items-center justify-center shadow-xl shadow-primary/5 dark:shadow-none backdrop-blur-sm">
+              <span className="text-2xl md:text-4xl font-bold text-primary dark:text-white font-serif">
                 {unit.value.toString().padStart(2, '0')}
               </span>
             </div>
-            {/* Soft glow effect */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-50 -z-10" />
+            {/* Soft glow effect - adjusted for dark mode visibility */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-50 dark:opacity-30 -z-10" />
           </div>
-          <span className="mt-4 text-xs md:text-sm text-primary/60 font-medium uppercase tracking-widest">
+          <span className="mt-4 text-xs md:text-sm text-primary/60 dark:text-white/60 font-medium uppercase tracking-widest">
             {unit.label}
           </span>
         </motion.div>

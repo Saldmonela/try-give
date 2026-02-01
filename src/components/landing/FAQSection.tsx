@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     question: 'Hadiahnya tahan berapa lama?',
-    answer: 'Full satu tahun, senilai $240 (4 Juta Rupiah). Mayan banget kan buat hemat uang jajan lo setahun. Abis itu bebas mau lanjut langganan atau nggak.',
+    answer: 'Tergantung lo juara berapa! Juara 1 dapet 12 Bulan Full. Juara 2 (9 Bulan), Juara 3 (6 Bulan), Juara 4 (3 Bulan), dan Juara 5 (1 Bulan). Mayan banget kan buat hemat uang jajan.',
   },
   {
     question: 'Kalo menang taunya dari mana?',

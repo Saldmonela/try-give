@@ -10,9 +10,9 @@ const benefits = [
     icon: Brain,
     title: 'Gemini 3 Pro: Otak Encer',
     description: 'Bukan sekadar chatbot. Dia bisa baca satu buku full hitungan detik, ngodingin tugas lo, sampe curhat colongan.',
-    bg: 'bg-[#0F172A]', // Deep Slate (Dark)
+    bg: 'bg-[#0F172A] dark:bg-black', // Deep Slate / Black
     titleColor: 'text-white',
-    descColor: 'text-slate-300', // High contrast on dark
+    descColor: 'text-slate-300', 
     iconBg: 'bg-white/10',
     border: 'border-white/20',
     iconColor: 'text-white',
@@ -23,12 +23,12 @@ const benefits = [
     icon: Palette,
     title: 'Nano Banana: Visual Ajaib',
     description: 'Bikin gambar level studio animasi Pixar. Lighting, tekstur, resolusi—semuanya on point tanpa tapi.',
-    bg: 'bg-yellow-50',
-    titleColor: 'text-yellow-900',
-    descColor: 'text-yellow-700',
-    iconBg: 'bg-yellow-100',
-    border: 'border-yellow-200',
-    iconColor: 'text-yellow-600',
+    bg: 'bg-yellow-50 dark:bg-yellow-950/10',
+    titleColor: 'text-yellow-900 dark:text-yellow-100',
+    descColor: 'text-yellow-700 dark:text-yellow-200/80',
+    iconBg: 'bg-yellow-100 dark:bg-yellow-900/20',
+    border: 'border-yellow-200 dark:border-yellow-800/30',
+    iconColor: 'text-yellow-600 dark:text-yellow-400',
     image: 'https://placehold.co/800x600/FEFCE8/854D0E?text=Nano+Banana+Pro',
     link: '/features#nano-banana'
   },
@@ -36,12 +36,12 @@ const benefits = [
     icon: Video,
     title: 'Bikin Video Modal Ngetik',
     description: 'Pake Veo 3.1, lo ketik doang jadi video estetik. Presentasi auto-kelar, konten TikTok auto-FYP.',
-    bg: 'bg-white',
-    titleColor: 'text-slate-900',
-    descColor: 'text-slate-600',
-    iconBg: 'bg-slate-100',
-    border: 'border-slate-200',
-    iconColor: 'text-slate-900',
+    bg: 'bg-white dark:bg-slate-900',
+    titleColor: 'text-slate-900 dark:text-white',
+    descColor: 'text-slate-600 dark:text-slate-400',
+    iconBg: 'bg-slate-100 dark:bg-slate-800',
+    border: 'border-slate-200 dark:border-slate-800',
+    iconColor: 'text-slate-900 dark:text-white',
     image: 'https://placehold.co/800x600/FFF/000?text=Veo+Video',
     link: '/features#veo'
   },
@@ -49,12 +49,12 @@ const benefits = [
     icon: Search,
     title: 'Joki Riset Otomatis',
     description: 'Lo tidur, dia kerja. Cari ratusan sumber, baca jurnal, terus bikinin rangkuman rapi buat tugas kuliah lo.',
-    bg: 'bg-[#F1F5F9]',
-    titleColor: 'text-slate-900',
-    descColor: 'text-slate-600',
-    iconBg: 'bg-white',
-    border: 'border-slate-200',
-    iconColor: 'text-slate-900',
+    bg: 'bg-[#F1F5F9] dark:bg-slate-800/30',
+    titleColor: 'text-slate-900 dark:text-white',
+    descColor: 'text-slate-600 dark:text-slate-400',
+    iconBg: 'bg-white dark:bg-slate-800',
+    border: 'border-slate-200 dark:border-slate-700/50',
+    iconColor: 'text-slate-900 dark:text-white',
     image: 'https://placehold.co/800x600/F1F5F9/000?text=Deep+Research',
     link: '/features#research'
   },
@@ -62,12 +62,12 @@ const benefits = [
     icon: Terminal,
     title: 'Codingan Lo Dibantuin AI',
     description: 'Lo nyuruh, dia ngoding full-stack. Debugging, testing, deploy? Beres. Lo tinggal terima jadi.',
-    bg: 'bg-white',
-    titleColor: 'text-slate-900',
-    descColor: 'text-slate-600',
-    iconBg: 'bg-slate-100',
-    border: 'border-slate-200',
-    iconColor: 'text-slate-900',
+    bg: 'bg-white dark:bg-slate-900',
+    titleColor: 'text-slate-900 dark:text-white',
+    descColor: 'text-slate-600 dark:text-slate-400',
+    iconBg: 'bg-slate-100 dark:bg-slate-800',
+    border: 'border-slate-200 dark:border-slate-800',
+    iconColor: 'text-slate-900 dark:text-white',
     image: 'https://placehold.co/800x600/FFF/000?text=Antigravity+IDE',
     link: '/features#antigravity'
   }
@@ -77,7 +77,7 @@ export default function BenefitsSection() {
   return (
     <section id="benefits">
       {benefits.map((benefit, index) => (
-        <div key={index} className={`py-24 px-4 ${benefit.bg} transition-colors duration-300`}>
+        <div key={index} className={`py-24 px-4 ${benefit.bg} transition-colors duration-300 border-none`}>
           <div className={`max-w-7xl mx-auto flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-16`}>
             <motion.div 
               initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
@@ -107,10 +107,9 @@ export default function BenefitsSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex-1 w-full aspect-square md:aspect-video rounded-3xl overflow-hidden border shadow-2xl relative group"
+              className="flex-1 w-full aspect-square md:aspect-video rounded-3xl overflow-hidden border dark:border-white/10 shadow-2xl relative group"
             >
                 {/* Image Component */}
-                {/* Gunakan unoptimized sementara jika pakai external URL tanpa config */}
                 <Image 
                     src={benefit.image}
                     alt={benefit.title}
@@ -120,7 +119,7 @@ export default function BenefitsSection() {
                 />
                 
                 {/* Optional overlay gradient */}
-                <div className="absolute inset-0 bg-black/5" />
+                <div className="absolute inset-0 bg-black/5 dark:bg-black/20" />
             </motion.div>
           </div>
         </div>

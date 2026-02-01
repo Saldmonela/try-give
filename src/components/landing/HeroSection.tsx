@@ -2,17 +2,17 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import CountdownTimer from './CountdownTimer';
+import { ThemeToggle } from '../ThemeToggle';
 
 export default function HeroSection() {
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
       <div className="flex items-center gap-2">
         <div className="w-8 h-8 rounded bg-primary flex items-center justify-center">
-          <span className="text-white font-bold text-sm">G</span>
+          <span className="text-white dark:text-primary-foreground font-bold text-sm">G</span>
         </div>
         <span className="font-semibold tracking-tight text-primary">Google AI Pro</span>
       </div>
@@ -22,18 +22,21 @@ export default function HeroSection() {
         <Link href="/features" className="hover:text-primary transition-colors text-purple-600 font-bold">Fitur Lengkap</Link>
         <Link href="/admin" className="hover:text-primary transition-colors">Admin</Link>
       </div>
-      <Link href="/submit">
-        <Button variant="outline" className="rounded-full border-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
-          Daftar Sekarang
-        </Button>
-      </Link>
+      <div className="flex items-center gap-4">
+        <ThemeToggle />
+        <Link href="/submit">
+          <Button variant="outline" className="rounded-full border-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+            Daftar Sekarang
+          </Button>
+        </Link>
+      </div>
     </nav>
   );
 }
 
 export function HeroContent() {
   const [totalUsers, setTotalUsers] = useState(0);
-  const [deadline, setDeadline] = useState(new Date('2026-03-01')); // Default fallback
+  const [deadline, setDeadline] = useState<Date>(new Date('2026-03-01T00:00:00+07:00')); // Default fallback to WIB
 
   useEffect(() => {
     // 1. Fetch Stats
@@ -51,6 +54,10 @@ export function HeroContent() {
       .then(res => res.json())
       .then(data => {
         if (data.giveaway_end_date) {
+            // Admin saves as WIB (+07:00) converted to UTC.
+            // So we just need to parse the UTC time back to a Date object.
+            // Browser handles the conversion to local time for display, 
+            // but the *difference* (countdown) remains correct for the absolute intended time.
             setDeadline(new Date(data.giveaway_end_date));
         }
       })
